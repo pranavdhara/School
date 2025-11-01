@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhaar Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="post" onsubmit="return validateAadhaar()">
+        {% csrf_token %}
+        <h2>Aadhaar Number Form</h2>
+        <label for="aadhaar">Enter Aadhaar Number:</label><br>
+        <input type="text" id="aadhaar" name="aadhaar" maxlength="12" placeholder="Enter 12-digit Aadhaar" required><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateAadhaar() {
+            const aadhaar = document.getElementById('aadhaar').value.trim();
+            const aadhaarRegex = /^\d{12}$/;
+            if (!aadhaarRegex.test(aadhaar)) {
+                alert("Please enter a valid 12-digit Aadhaar number.");
+                return false;
+            }
+            alert("Aadhaar submitted successfully!");
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
